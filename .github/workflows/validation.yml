@@ -11,7 +11,7 @@ on:
         required: true
         type: string
 jobs:
- reusable_workflow_job:
+ validation:
   runs-on: ubuntu-latest
   steps:
   - run: echo ${{ inputs.application }}
