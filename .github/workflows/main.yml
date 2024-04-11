@@ -6,6 +6,11 @@ on:
         required: true
         type: string
 jobs: 
+  welcome:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Welcome to the CID process for ${{ inputs.APP_NAME }} application"
+    
   validate:     
     uses: ./.github/workflows/validation.yml
     with: 
