@@ -1,6 +1,6 @@
 name: SONNAR SCAN
 on:
-  workflow_dispatch:
+  on.workflow_call:
     inputs:
       application:
         required: true
