@@ -13,10 +13,12 @@ jobs:
     
   validate:     
     uses: ./.github/workflows/validation.yml
+    needs: welcome
     with: 
       application: ${{ inputs.application }}
       
   sonar-scan:     
     uses: ./.github/workflows/sonar-scan.yml
+    needs: [welcome,validate]
     with: 
       application: ${{ inputs.application }}
