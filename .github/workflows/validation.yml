@@ -1,3 +1,4 @@
+name: VALIDATION STEP
 on:
   workflow_dispatch:
     inputs:
