@@ -16,3 +16,7 @@ jobs:
     with: 
       application: ${{ inputs.application }}
       
+  sonar-scan:     
+    uses: ./.github/workflows/sonar-scan.yml
+    with: 
+      application: ${{ inputs.application }}
