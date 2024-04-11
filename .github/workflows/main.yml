@@ -9,10 +9,10 @@ jobs:
   welcome:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Welcome to the CICD process for ${{ inputs.APP_NAME }} application"
+      - run: echo "Welcome to the CICD process for ${{ inputs.application }} application"
     
   validate:     
     uses: ./.github/workflows/validation.yml
     with: 
-      application: ${{ inputs.APP_NAME }}
+      application: ${{ inputs.application }}
       
