@@ -1,5 +1,9 @@
 on:
   workflow_dispatch:
+    inputs:
+      application:
+        required: true
+        type: string  
   workflow_call:
     inputs:
       application:
