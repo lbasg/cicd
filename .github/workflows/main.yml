@@ -1,0 +1,13 @@
+name: CICD MAIN WORKFLOW
+on: 
+  workflow_call:
+    inputs:
+      application:
+        required: true
+        type: string
+jobs: 
+  validate:     
+    uses: ./.github/workflows/validation.yml
+    with: 
+      application: ${{ inputs.APP_NAME }}
+      
