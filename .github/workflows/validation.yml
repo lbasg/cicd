@@ -14,4 +14,8 @@ jobs:
  validation:
   runs-on: ubuntu-latest
   steps:
-  - run: echo ${{ inputs.application }}
+  - uses: actions/checkout@v4
+    with:
+      repository: 'lbasg/${{ application }}'
+  - name: load Iberdrolafile
+    run: cat ./Iberdrolafile
