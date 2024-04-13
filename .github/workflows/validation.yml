@@ -17,5 +17,8 @@ jobs:
   - uses: actions/checkout@v4
     with:
       repository: 'lbasg/${{ inputs.application }}'
-  - name: load Iberdrolafile
-    run: cat ./Iberdrolafile
+  - name: 
+    run: |
+      echo APPLICATION: ${{ inputs.application }}'
+      echo TECHNOLOGY: 
+      echo TAG:
