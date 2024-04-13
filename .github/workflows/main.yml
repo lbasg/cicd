@@ -10,7 +10,7 @@ on:
         type: string  
 jobs: 
   welcome:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - run: echo "Welcome to the CICD process for ${{ inputs.application }} application"
     
