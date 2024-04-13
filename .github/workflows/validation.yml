@@ -18,12 +18,12 @@ on:
         type: string
 jobs:
  validation:
-  runs-on: ubuntu-latest
+  runs-on: self-hosted
   steps:
   - uses: actions/checkout@v4
     with:
       repository: 'lbasg/${{ inputs.application }}'
-  - name: 
+  - name: variables
     run: |
       echo APPLICATION: ${{ inputs.application }}'
       echo TECHNOLOGY: ${{ inputs.technology }}'
