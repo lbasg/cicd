@@ -19,6 +19,7 @@ jobs:
     needs: welcome
     with: 
       application: ${{ inputs.application }}
+      technology: ${{ inputs.technology }}
       
   sonar-scan:     
     uses: ./.github/workflows/sonar-scan.yml
