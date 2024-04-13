@@ -5,6 +5,9 @@ on:
       application:
         required: true
         type: string
+      technology:
+        required: true
+        type: string  
 jobs: 
   welcome:
     runs-on: ubuntu-latest

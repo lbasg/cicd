@@ -4,10 +4,16 @@ on:
     inputs:
       application:
         required: true
+        type: string
+      technology:
+        required: true
         type: string  
   workflow_call:
     inputs:
       application:
+        required: true
+        type: string
+      technology:
         required: true
         type: string
 jobs:
@@ -20,5 +26,5 @@ jobs:
   - name: 
     run: |
       echo APPLICATION: ${{ inputs.application }}'
-      echo TECHNOLOGY: 
+      echo TECHNOLOGY: ${{ inputs.technology }}'
       echo TAG:
