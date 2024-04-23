@@ -1,50 +1,30 @@
-name: CICD MAIN WORKFLOW
+name: CICD JDK11 WORKFLOW
 on: 
   workflow_call:
     inputs:
       repository:
         required: true
         type: string
+      agent:
+        required: true
+        type: string        
 jobs: 
-
-  Validate-Iberdrolafile:  
+  Build:  
     runs-on: ubuntu-latest
     steps:
-      #- name: Setup-Java
-      #  uses: actions/setup-java@v4.2.1
-      #  with:
-      #    distribution: 'temurin' # See 'Supported distributions' for available options
-      #    java-version: '11'
+      - name: Setup-Java
+        uses: actions/setup-java@v4.2.1
+        with:
+          distribution: 'temurin' # See 'Supported distributions' for available options
+          java-version: '11'
       #    overwrite-settings: false
       - name: Checkout Iberdrolafile
         uses: actions/checkout@v4
         with:
           repository: ${{ inputs.repository }}
-          sparse-checkout: |
-            Iberdrolafile
-          sparse-checkout-cone-mode: false
-      - name: Parse Iberdrolafile
-        run: | 
-          s='[[:space:]]*' w='[a-zA-Z0-9_]*' fs=$(echo @|tr @ '\034')
-          sed -ne "s|^\($s\):|\1|" \
-          -e "s|^\($s\)\($w\)$s:$s[\"']\(.*\)[\"']$s\$|\1$fs\2$fs\3|p" \
-          -e "s|^\($s\)\($w\)$s:$s\(.*\)$s\$|\1$fs\2$fs\3|p"  Iberdrolafile |
-          awk -F$fs '{
-          indent = length($1)/2;
-          vname[indent] = $2;
-          for (i in vname) {if (i > indent) {delete vname[i]}}
-          if (length($3) > 0) {
-            vn=""; for (i=0; i<indent; i++) {vn=(vn)(vname[i])("_")}
-            printf("%s%s=%s\n",vn, $2, $3) 
-          }
-          }' | sed 's/__/_/g'; >> $GITHUB_OUTPUT
-    
-  CICD:
-    needs: [Validate-Iberdrolafile]
-    uses: ./.github/workflows/main.yml@${{ pipeline_agent }}
-    with: 
-      reposiotry: ${{ inputs.repository }}
-      path: ${{ needs.Validate-Iberdrolafile.outputs.build_path }}
-        
+      - run: |
+          echo: ${{ inputs.agent }}
+
+
 
 
