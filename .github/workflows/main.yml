@@ -23,7 +23,7 @@ jobs:
         with:
           repository: ${{ inputs.repository }}
       - run: |
-          echo: ${{ inputs.path }}
+          echo ${{ inputs.path }}
 
 
 
