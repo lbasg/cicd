@@ -24,6 +24,7 @@ jobs:
           sparse-checkout-cone-mode: false
       - name: Parse Iberdrolafile
         run: | 
+          sed -i.bak $'s/\t/ /g' filename
           prefix=Iberdrolafile_
           s='[[:space:]]*' w='[a-zA-Z0-9_]*' fs=$(echo @|tr @ '\034')
           sed -ne "s|^\($s\):|\1|" \
