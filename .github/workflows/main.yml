@@ -18,7 +18,7 @@ jobs:
           distribution: 'temurin' # See 'Supported distributions' for available options
           java-version: '11'
       #    overwrite-settings: false
-      - name: Checkout Iberdrolafile
+      - name: Checkout
         uses: actions/checkout@v4
         with:
           repository: ${{ inputs.repository }}
