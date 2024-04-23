@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs: 
       build_path: ${{ steps.iberdrolafile.outputs.build_path }}
-      agent: ${{ steps.iberdrolafile.outputs.pipeline_agent }}
+      pipeline_agent: ${{ steps.iberdrolafile.outputs.pipeline_agent }}
     steps:
       #- name: Setup-Java
       #  uses: actions/setup-java@v4.2.1
