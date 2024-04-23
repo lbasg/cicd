@@ -2,27 +2,54 @@ name: CICD MAIN WORKFLOW
 on: 
   workflow_call:
     inputs:
-      application:
+      repository:
         required: true
         type: string
-      technology:
-        required: true
-        type: string  
 jobs: 
-  welcome:
-    runs-on: self-hosted
+
+  Validate-Iberdrolafile:  
+    runs-on: ubuntu-latest
+    outputs: 
+      build_path: ${{ steps.iberdrolafile.outputs.build_path }}
+      agent: ${{ steps.iberdrolafile.outputs.pipeline_agent }}
     steps:
-      - run: echo "Welcome to the CICD process for ${{ inputs.application }} application"
+      #- name: Setup-Java
+      #  uses: actions/setup-java@v4.2.1
+      #  with:
+      #    distribution: 'temurin' # See 'Supported distributions' for available options
+      #    java-version: '11'
+      #    overwrite-settings: false
+      - name: Checkout Iberdrolafile
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ inputs.repository }}
+          sparse-checkout: |
+            Iberdrolafile
+          sparse-checkout-cone-mode: false
+      - name: Parse Iberdrolafile
+        id: iberdrolafile
+        run: | 
+          s='[[:space:]]*' w='[a-zA-Z0-9_]*' fs=$(echo @|tr @ '\034')
+          sed -ne "s|^\($s\):|\1|" \
+          -e "s|^\($s\)\($w\)$s:$s[\"']\(.*\)[\"']$s\$|\1$fs\2$fs\3|p" \
+          -e "s|^\($s\)\($w\)$s:$s\(.*\)$s\$|\1$fs\2$fs\3|p"  Iberdrolafile |
+          awk -F$fs '{
+          indent = length($1)/2;
+          vname[indent] = $2;
+          for (i in vname) {if (i > indent) {delete vname[i]}}
+          if (length($3) > 0) {
+            vn=""; for (i=0; i<indent; i++) {vn=(vn)(vname[i])("_")}
+            printf("%s%s=%s\n",vn, $2, $3) 
+          }
+          }' | sed 's/__/_/g' >> $GITHUB_OUTPUT
+      - name: echo OUTPUTS
+        run: |
+          echo $GITHUB_OUTPUT
     
-  validate:     
-    uses: ./.github/workflows/validation.yml
-    needs: welcome
+  Build_JDK11:
+    #if: ${{ needs.Validate-Iberdrolafile.outputs.pipeline_agent == 'jdk11' }}
+    needs: [Validate-Iberdrolafile]
+    uses: lbasg/cicd/.github/workflows/main.yml@jdk11
     with: 
-      application: ${{ inputs.application }}
-      technology: ${{ inputs.technology }}
-      
-  sonar-scan:     
-    uses: ./.github/workflows/sonar-scan.yml
-    needs: [welcome,validate]
-    with: 
-      application: ${{ inputs.application }}
+      repository: ${{ inputs.repository }}
+      path: ${{ needs.Validate-Iberdrolafile.outputs.build_path }}
