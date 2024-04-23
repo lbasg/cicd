@@ -5,7 +5,7 @@ on:
       repository:
         required: true
         type: string
-      agent:
+      path:
         required: true
         type: string        
 jobs: 
@@ -23,7 +23,7 @@ jobs:
         with:
           repository: ${{ inputs.repository }}
       - run: |
-          echo: ${{ inputs.agent }}
+          echo: ${{ inputs.path }}
 
 
 
