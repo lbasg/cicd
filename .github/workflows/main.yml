@@ -47,7 +47,7 @@ jobs:
           echo $GITHUB_OUTPUT
     
   Build_JDK11:
-    #if: ${{ needs.Validate-Iberdrolafile.outputs.pipeline_agent == 'jdk11' }}
+    if: ${{ needs.Validate-Iberdrolafile.outputs.pipeline_agent == 'jdk11' }}
     needs: [Validate-Iberdrolafile]
     uses: lbasg/cicd/.github/workflows/main.yml@jdk11
     with: 
