@@ -27,7 +27,6 @@ jobs:
           cat Iberdrolafile | grep -v ^#
           sed -i $'s/\t/  /g' Iberdrolafile
           cat Iberdrolafile | grep -v ^#
-          prefix=Iberdrolafile_
           s='[[:space:]]*' w='[a-zA-Z0-9_]*' fs=$(echo @|tr @ '\034')
           sed -ne "s|^\($s\):|\1|" \
           -e "s|^\($s\)\($w\)$s:$s[\"']\(.*\)[\"']$s\$|\1$fs\2$fs\3|p" \
@@ -38,7 +37,7 @@ jobs:
           for (i in vname) {if (i > indent) {delete vname[i]}}
           if (length($3) > 0) {
             vn=""; for (i=0; i<indent; i++) {vn=(vn)(vname[i])("_")}
-            printf("%s%s%s=\"%s\"\n", "'$prefix'",vn, $2, $3);
+            printf("%s%s%s=\"%s\"\n",vn, $2, $3);
           }
           }'
 
