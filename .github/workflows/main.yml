@@ -24,9 +24,6 @@ jobs:
           sparse-checkout-cone-mode: false
       - name: Parse Iberdrolafile
         run: | 
-          cat Iberdrolafile | grep -v ^#
-          sed -i $'s/\t/  /g' Iberdrolafile
-          cat Iberdrolafile | grep -v ^#
           s='[[:space:]]*' w='[a-zA-Z0-9_]*' fs=$(echo @|tr @ '\034')
           sed -ne "s|^\($s\):|\1|" \
           -e "s|^\($s\)\($w\)$s:$s[\"']\(.*\)[\"']$s\$|\1$fs\2$fs\3|p" \
