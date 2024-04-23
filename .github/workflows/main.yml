@@ -51,3 +51,12 @@ jobs:
       repository: ${{ inputs.repository }}
       path: ${{ needs.Validate-Iberdrolafile.outputs.build_path }}
       agent: ${{ needs.Validate-Iberdrolafile.outputs.pipeline_agent }}
+      
+  Build_JDK8:
+    if: ${{ needs.Validate-Iberdrolafile.outputs.pipeline_agent == 'jdk8' }}
+    needs: [Validate-Iberdrolafile]
+    uses: lbasg/cicd/.github/workflows/main.yml@jdk11
+    with: 
+      repository: ${{ inputs.repository }}
+      path: ${{ needs.Validate-Iberdrolafile.outputs.build_path }}
+      agent: ${{ needs.Validate-Iberdrolafile.outputs.pipeline_agent }}
