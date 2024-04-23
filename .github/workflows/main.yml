@@ -23,7 +23,7 @@ jobs:
         with:
           repository: ${{ inputs.repository }}
       - run: |
-          echo ${{ inputs.path }}
+          mvn -f ${{ inputs.path }}/pom.xml clean install package
 
 
 
