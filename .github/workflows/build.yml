@@ -1,6 +1,9 @@
 on:
   workflow_call:
     inputs: 
+      repository: 
+        required: true
+        type: string
       agent: 
         required: true
         type: string
