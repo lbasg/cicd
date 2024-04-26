@@ -50,4 +50,8 @@ jobs:
     if: always()
     runs-on: ubuntu-latest
     steps: 
-      - run: echo "upload"
+      - uses: actions/upload-artifact@v4
+        with:
+          path: ${{ inputs.path }}/target
+          if-no-files-found: error
+          retention-days: 1
