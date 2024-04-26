@@ -43,20 +43,13 @@ jobs:
           }
           }' | sed 's/__/_/g' | tee -a $GITHUB_OUTPUT
     
-  Build_JDK11:
+  Build:
     if: ${{ needs.Validate-Iberdrolafile.outputs.pipeline_agent == 'jdk11' }}
     needs: [Validate-Iberdrolafile]
-    uses: lbasg/cicd/.github/workflows/main.yml@jdk11
+    uses: lbasg/cicd/.github/workflows/build.yml@main
     with: 
       repository: ${{ inputs.repository }}
       path: ${{ needs.Validate-Iberdrolafile.outputs.build_path }}
       agent: ${{ needs.Validate-Iberdrolafile.outputs.pipeline_agent }}
       
-  Build_JDK8:
-    if: ${{ needs.Validate-Iberdrolafile.outputs.pipeline_agent == 'jdk8' }}
-    needs: [Validate-Iberdrolafile]
-    uses: lbasg/cicd/.github/workflows/main.yml@jdk8
-    with: 
-      repository: ${{ inputs.repository }}
-      path: ${{ needs.Validate-Iberdrolafile.outputs.build_path }}
-      agent: ${{ needs.Validate-Iberdrolafile.outputs.pipeline_agent }}
+
