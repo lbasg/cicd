@@ -46,6 +46,7 @@ jobs:
           echo "mvn -f ${{ inputs.path }}/pom.xml clean install package"       
 
   Upload_artifact:
+    needs: [Build_JDK8, Build_JDK11]
     if: always()
     runs-on: ubuntu-latest
     steps: 
