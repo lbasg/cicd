@@ -44,3 +44,9 @@ jobs:
           repository: ${{ inputs.repository }}
       - run: |
           echo "mvn -f ${{ inputs.path }}/pom.xml clean install package"       
+
+  Upload_artifact:
+    if: always()
+    runs-on: ubuntu-latest
+    steps: 
+      - run: echo "upload"
