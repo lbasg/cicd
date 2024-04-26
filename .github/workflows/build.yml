@@ -7,7 +7,7 @@ on:
       agent: 
         required: true
         type: string
-      build-path: 
+      path: 
         required: true
         type: string
 jobs:        
